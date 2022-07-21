@@ -1,7 +1,7 @@
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.model_selection import train_test_split
-from sklearn.neural_network import MLPRegressor
+# from sklearn.neural_network import MLPRegressor
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
@@ -36,13 +36,15 @@ print("経過時間:{}, Finish Make Morgan Fingerprint".format(time.perf_counter
 # データセットの定義と分割
 X = np.array(dataset_df["morgan_fingerprint"].values.tolist())
 X_rest = dataset_df.drop(['SMILES','λmax',"morgan_fingerprint"], axis=1).values
+# X = dataset_df.drop(['SMILES','λmax'], axis=1).values
 X = np.hstack([X, X_rest])
 y = dataset_df["λmax"].values
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 # 回帰モデル
 print("経過時間:{}, Start Training".format(time.perf_counter()- start_time))
-model = MLPRegressor(hidden_layer_sizes=(128,128,))
+# model = MLPRegressor(hidden_layer_sizes=(128,128,))
+model = LinearRegression()
 model.fit(X_train, y_train)
 print("経過時間:{}, Finish Training".format(time.perf_counter()- start_time))
 
