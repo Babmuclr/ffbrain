@@ -43,8 +43,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 # 回帰モデル
 print("経過時間:{}, Start Training".format(time.perf_counter()- start_time))
-# model = MLPRegressor(hidden_layer_sizes=(128,128,))
-model = LinearRegression()
+model = MLPRegressor(hidden_layer_sizes=(128,128,))
+# model = LinearRegression()
 model.fit(X_train, y_train)
 print("経過時間:{}, Finish Training".format(time.perf_counter()- start_time))
 
