@@ -1,7 +1,7 @@
-from sklearn.linear_model import LinearRegression
+# from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.model_selection import train_test_split
-# from sklearn.neural_network import MLPRegressor
+from sklearn.neural_network import MLPRegressor
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
@@ -12,7 +12,7 @@ import pandas as pd
 import numpy as np
 import time
 
-def get_morgan_fingerprint(smile, radius=2, bits=1024):
+def get_morgan_fingerprint(smile, radius=3, bits=1024):
     mol_ = Chem.MolFromSmiles(smile)
     bit_morgan_ = {}
     if mol_ == None:
@@ -43,9 +43,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 # 回帰モデル
 print("経過時間:{}, Start Training".format(time.perf_counter()- start_time))
-model = MLPRegressor(hidden_layer_sizes=(128,128,))
+model = MLPRegressor(hidden_layer_sizes=(128,128))
 # model = LinearRegression()
-model.fit(X_train, y_train)
+model.fit(X, y)
 print("経過時間:{}, Finish Training".format(time.perf_counter()- start_time))
 
 # 予測

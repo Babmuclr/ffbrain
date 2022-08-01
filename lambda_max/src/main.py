@@ -7,7 +7,7 @@ import numpy as np
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
-def get_morgan_fingerprint(smile, radius=2, bits=1024):
+def get_morgan_fingerprint(smile, radius=3, bits=1024):
     mol_ = Chem.MolFromSmiles(smile)
     bit_morgan_ = {}
     if mol_ == None:
